@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: flashsale
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/flashsale}
+    username: ${DB_USERNAME:myuser}
+    password: ${DB_PASSWORD:mypassword}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 50
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 1000ms
+          multiplier: 2.0
+          max-interval: 10000ms
+        default-requeue-rejected: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/flashsale}
+    user: ${DB_USERNAME:myuser}
+    password: ${DB_PASSWORD:mypassword}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+flashsale:
+  security:
+    hmac-secret: ${HMAC_SECRET:my-secret-key-123}
+    timestamp-tolerance: 30

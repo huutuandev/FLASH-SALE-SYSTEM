@@ -1,0 +1,4 @@
+com\example\flashsale\service\OrderProcessingIntegrationTest.class
+com\example\flashsale\controller\FlashSaleApiControllerIntegrationTest.class
+com\example\flashsale\repository\ProductRepositoryTest.class
+com\example\flashsale\service\RedisInventoryServiceConcurrencyTest.class
